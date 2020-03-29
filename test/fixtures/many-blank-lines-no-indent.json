@@ -1,0 +1,569 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "footnoteReference",
+          "identifier": "1",
+          "label": "1",
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 5,
+              "offset": 4
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnoteReference",
+          "identifier": "2",
+          "label": "2",
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 5,
+              "offset": 4
+            },
+            "end": {
+              "line": 1,
+              "column": 9,
+              "offset": 8
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnoteReference",
+          "identifier": "3",
+          "label": "3",
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 9,
+              "offset": 8
+            },
+            "end": {
+              "line": 1,
+              "column": 13,
+              "offset": 12
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnoteReference",
+          "identifier": "4",
+          "label": "4",
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 13,
+              "offset": 12
+            },
+            "end": {
+              "line": 1,
+              "column": 17,
+              "offset": 16
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "offset": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 17,
+          "offset": 16
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "footnoteDefinition",
+      "identifier": "1",
+      "label": "1",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Paragraph",
+              "position": {
+                "start": {
+                  "line": 3,
+                  "column": 7,
+                  "offset": 24
+                },
+                "end": {
+                  "line": 3,
+                  "column": 16,
+                  "offset": 33
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 3,
+              "column": 7,
+              "offset": 24
+            },
+            "end": {
+              "line": 3,
+              "column": 16,
+              "offset": 33
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 3,
+          "column": 1,
+          "offset": 18
+        },
+        "end": {
+          "line": 3,
+          "column": 16,
+          "offset": 33
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "Heading",
+          "position": {
+            "start": {
+              "line": 6,
+              "column": 3,
+              "offset": 38
+            },
+            "end": {
+              "line": 6,
+              "column": 10,
+              "offset": 45
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 6,
+          "column": 1,
+          "offset": 36
+        },
+        "end": {
+          "line": 6,
+          "column": 10,
+          "offset": 45
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "footnoteDefinition",
+      "identifier": "2",
+      "label": "2",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Paragraph",
+              "position": {
+                "start": {
+                  "line": 9,
+                  "column": 7,
+                  "offset": 54
+                },
+                "end": {
+                  "line": 9,
+                  "column": 16,
+                  "offset": 63
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 9,
+              "column": 7,
+              "offset": 54
+            },
+            "end": {
+              "line": 9,
+              "column": 16,
+              "offset": 63
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "“code”, which is paragraphs…",
+              "position": {
+                "start": {
+                  "line": 12,
+                  "column": 5,
+                  "offset": 70
+                },
+                "end": {
+                  "line": 12,
+                  "column": 33,
+                  "offset": 98
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 12,
+              "column": 5,
+              "offset": 70
+            },
+            "end": {
+              "line": 12,
+              "column": 33,
+              "offset": 98
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "…because of the indent!",
+              "position": {
+                "start": {
+                  "line": 15,
+                  "column": 5,
+                  "offset": 105
+                },
+                "end": {
+                  "line": 15,
+                  "column": 28,
+                  "offset": 128
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 15,
+              "column": 5,
+              "offset": 105
+            },
+            "end": {
+              "line": 15,
+              "column": 28,
+              "offset": 128
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 9,
+          "column": 1,
+          "offset": 48
+        },
+        "end": {
+          "line": 15,
+          "column": 28,
+          "offset": 128
+        },
+        "indent": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "type": "footnoteDefinition",
+      "identifier": "3",
+      "label": "3",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Paragraph",
+              "position": {
+                "start": {
+                  "line": 18,
+                  "column": 7,
+                  "offset": 137
+                },
+                "end": {
+                  "line": 18,
+                  "column": 16,
+                  "offset": 146
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 18,
+              "column": 7,
+              "offset": 137
+            },
+            "end": {
+              "line": 18,
+              "column": 16,
+              "offset": 146
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 18,
+          "column": 1,
+          "offset": 131
+        },
+        "end": {
+          "line": 18,
+          "column": 16,
+          "offset": 146
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "blockquote",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "block quote",
+              "position": {
+                "start": {
+                  "line": 21,
+                  "column": 3,
+                  "offset": 151
+                },
+                "end": {
+                  "line": 21,
+                  "column": 14,
+                  "offset": 162
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 21,
+              "column": 3,
+              "offset": 151
+            },
+            "end": {
+              "line": 21,
+              "column": 14,
+              "offset": 162
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 21,
+          "column": 1,
+          "offset": 149
+        },
+        "end": {
+          "line": 21,
+          "column": 14,
+          "offset": 162
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "footnoteDefinition",
+      "identifier": "4",
+      "label": "4",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Paragraph",
+              "position": {
+                "start": {
+                  "line": 24,
+                  "column": 7,
+                  "offset": 171
+                },
+                "end": {
+                  "line": 24,
+                  "column": 16,
+                  "offset": 180
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 24,
+              "column": 7,
+              "offset": 171
+            },
+            "end": {
+              "line": 24,
+              "column": 16,
+              "offset": 180
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 24,
+          "column": 1,
+          "offset": 165
+        },
+        "end": {
+          "line": 24,
+          "column": 16,
+          "offset": 180
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "start": null,
+      "spread": false,
+      "children": [
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "list",
+                  "position": {
+                    "start": {
+                      "line": 27,
+                      "column": 3,
+                      "offset": 185
+                    },
+                    "end": {
+                      "line": 27,
+                      "column": 7,
+                      "offset": 189
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 27,
+                  "column": 3,
+                  "offset": 185
+                },
+                "end": {
+                  "line": 27,
+                  "column": 7,
+                  "offset": 189
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 27,
+              "column": 1,
+              "offset": 183
+            },
+            "end": {
+              "line": 27,
+              "column": 7,
+              "offset": 189
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 27,
+          "column": 1,
+          "offset": 183
+        },
+        "end": {
+          "line": 27,
+          "column": 7,
+          "offset": 189
+        },
+        "indent": []
+      }
+    }
+  ],
+  "position": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "offset": 0
+    },
+    "end": {
+      "line": 28,
+      "column": 1,
+      "offset": 190
+    }
+  }
+}

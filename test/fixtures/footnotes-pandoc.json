@@ -1,0 +1,363 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Here is a footnote reference,",
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 30,
+              "offset": 29
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnoteReference",
+          "identifier": "1",
+          "label": "1",
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 30,
+              "offset": 29
+            },
+            "end": {
+              "line": 1,
+              "column": 34,
+              "offset": 33
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "text",
+          "value": " and another.",
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 34,
+              "offset": 33
+            },
+            "end": {
+              "line": 1,
+              "column": 47,
+              "offset": 46
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnoteReference",
+          "identifier": "longnote",
+          "label": "longnote",
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 47,
+              "offset": 46
+            },
+            "end": {
+              "line": 1,
+              "column": 58,
+              "offset": 57
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "offset": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 58,
+          "offset": 57
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "footnoteDefinition",
+      "identifier": "1",
+      "label": "1",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Here is the footnote.",
+              "position": {
+                "start": {
+                  "line": 3,
+                  "column": 7,
+                  "offset": 65
+                },
+                "end": {
+                  "line": 3,
+                  "column": 28,
+                  "offset": 86
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 3,
+              "column": 7,
+              "offset": 65
+            },
+            "end": {
+              "line": 3,
+              "column": 28,
+              "offset": 86
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 3,
+          "column": 1,
+          "offset": 59
+        },
+        "end": {
+          "line": 3,
+          "column": 28,
+          "offset": 86
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "footnoteDefinition",
+      "identifier": "longnote",
+      "label": "longnote",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Here’s one with multiple blocks.",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 14,
+                  "offset": 101
+                },
+                "end": {
+                  "line": 5,
+                  "column": 46,
+                  "offset": 133
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 5,
+              "column": 14,
+              "offset": 101
+            },
+            "end": {
+              "line": 5,
+              "column": 46,
+              "offset": 133
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Subsequent paragraphs are indented to show that they\nbelong to the previous footnote.",
+              "position": {
+                "start": {
+                  "line": 7,
+                  "column": 5,
+                  "offset": 139
+                },
+                "end": {
+                  "line": 8,
+                  "column": 33,
+                  "offset": 224
+                },
+                "indent": [
+                  1
+                ]
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 7,
+              "column": 5,
+              "offset": 139
+            },
+            "end": {
+              "line": 8,
+              "column": 33,
+              "offset": 224
+            },
+            "indent": [
+              1
+            ]
+          }
+        },
+        {
+          "type": "code",
+          "lang": null,
+          "meta": null,
+          "value": "{ some.code }",
+          "position": {
+            "start": {
+              "line": 10,
+              "column": 5,
+              "offset": 230
+            },
+            "end": {
+              "line": 10,
+              "column": 22,
+              "offset": 247
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "The whole paragraph can be indented, or just the first\nline.  In this way, multi-paragraph footnotes work like\nmulti-paragraph list items.",
+              "position": {
+                "start": {
+                  "line": 12,
+                  "column": 5,
+                  "offset": 253
+                },
+                "end": {
+                  "line": 14,
+                  "column": 32,
+                  "offset": 399
+                },
+                "indent": [
+                  5,
+                  5
+                ]
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 12,
+              "column": 5,
+              "offset": 253
+            },
+            "end": {
+              "line": 14,
+              "column": 32,
+              "offset": 399
+            },
+            "indent": [
+              5,
+              5
+            ]
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 5,
+          "column": 1,
+          "offset": 88
+        },
+        "end": {
+          "line": 14,
+          "column": 32,
+          "offset": 399
+        },
+        "indent": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "This paragraph won’t be part of the note, because it\nisn’t indented.",
+          "position": {
+            "start": {
+              "line": 16,
+              "column": 1,
+              "offset": 401
+            },
+            "end": {
+              "line": 17,
+              "column": 16,
+              "offset": 469
+            },
+            "indent": [
+              1
+            ]
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 16,
+          "column": 1,
+          "offset": 401
+        },
+        "end": {
+          "line": 17,
+          "column": 16,
+          "offset": 469
+        },
+        "indent": [
+          1
+        ]
+      }
+    }
+  ],
+  "position": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "offset": 0
+    },
+    "end": {
+      "line": 18,
+      "column": 1,
+      "offset": 470
+    }
+  }
+}

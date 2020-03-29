@@ -1,0 +1,972 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Here is an inline note.",
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 24,
+              "offset": 23
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnote",
+          "children": [
+            {
+              "type": "text",
+              "value": "Inlines notes are easier to write, since\nyou don’t have to pick an identifier and move down to type the\nnote.",
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 26,
+                  "offset": 25
+                },
+                "end": {
+                  "line": 3,
+                  "column": 6,
+                  "offset": 134
+                },
+                "indent": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 24,
+              "offset": 23
+            },
+            "end": {
+              "line": 3,
+              "column": 7,
+              "offset": 135
+            },
+            "indent": [
+              1,
+              1
+            ]
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "offset": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 7,
+          "offset": 135
+        },
+        "indent": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "alpha ",
+          "position": {
+            "start": {
+              "line": 5,
+              "column": 1,
+              "offset": 137
+            },
+            "end": {
+              "line": 5,
+              "column": 7,
+              "offset": 143
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnote",
+          "children": [
+            {
+              "type": "text",
+              "value": "one ",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 9,
+                  "offset": 145
+                },
+                "end": {
+                  "line": 5,
+                  "column": 13,
+                  "offset": 149
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "linkReference",
+              "identifier": "balanced",
+              "label": "balanced",
+              "referenceType": "shortcut",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "balanced",
+                  "position": {
+                    "start": {
+                      "line": 5,
+                      "column": 14,
+                      "offset": 150
+                    },
+                    "end": {
+                      "line": 5,
+                      "column": 22,
+                      "offset": 158
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 13,
+                  "offset": 149
+                },
+                "end": {
+                  "line": 5,
+                  "column": 23,
+                  "offset": 159
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": " three",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 23,
+                  "offset": 159
+                },
+                "end": {
+                  "line": 5,
+                  "column": 29,
+                  "offset": 165
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 5,
+              "column": 7,
+              "offset": 143
+            },
+            "end": {
+              "line": 5,
+              "column": 30,
+              "offset": 166
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "text",
+          "value": " bravo.",
+          "position": {
+            "start": {
+              "line": 5,
+              "column": 30,
+              "offset": 166
+            },
+            "end": {
+              "line": 5,
+              "column": 37,
+              "offset": 173
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 5,
+          "column": 1,
+          "offset": 137
+        },
+        "end": {
+          "line": 5,
+          "column": 37,
+          "offset": 173
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "alpha ^[four ",
+          "position": {
+            "start": {
+              "line": 7,
+              "column": 1,
+              "offset": 175
+            },
+            "end": {
+              "line": 7,
+              "column": 14,
+              "offset": 188
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "linkReference",
+          "identifier": "unbalanced five",
+          "label": "unbalanced five",
+          "referenceType": "shortcut",
+          "children": [
+            {
+              "type": "text",
+              "value": "unbalanced five",
+              "position": {
+                "start": {
+                  "line": 7,
+                  "column": 15,
+                  "offset": 189
+                },
+                "end": {
+                  "line": 7,
+                  "column": 30,
+                  "offset": 204
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 7,
+              "column": 14,
+              "offset": 188
+            },
+            "end": {
+              "line": 7,
+              "column": 31,
+              "offset": 205
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "text",
+          "value": " bravo.",
+          "position": {
+            "start": {
+              "line": 7,
+              "column": 31,
+              "offset": 205
+            },
+            "end": {
+              "line": 7,
+              "column": 38,
+              "offset": 212
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 7,
+          "column": 1,
+          "offset": 175
+        },
+        "end": {
+          "line": 7,
+          "column": 38,
+          "offset": 212
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "alpha ",
+          "position": {
+            "start": {
+              "line": 9,
+              "column": 1,
+              "offset": 214
+            },
+            "end": {
+              "line": 9,
+              "column": 7,
+              "offset": 220
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnote",
+          "children": [
+            {
+              "type": "text",
+              "value": "six unbalanced",
+              "position": {
+                "start": {
+                  "line": 9,
+                  "column": 9,
+                  "offset": 222
+                },
+                "end": {
+                  "line": 9,
+                  "column": 23,
+                  "offset": 236
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 9,
+              "column": 7,
+              "offset": 220
+            },
+            "end": {
+              "line": 9,
+              "column": 24,
+              "offset": 237
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "text",
+          "value": " seven] bravo.",
+          "position": {
+            "start": {
+              "line": 9,
+              "column": 24,
+              "offset": 237
+            },
+            "end": {
+              "line": 9,
+              "column": 38,
+              "offset": 251
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 9,
+          "column": 1,
+          "offset": 214
+        },
+        "end": {
+          "line": 9,
+          "column": 38,
+          "offset": 251
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "alpha ",
+          "position": {
+            "start": {
+              "line": 11,
+              "column": 1,
+              "offset": 253
+            },
+            "end": {
+              "line": 11,
+              "column": 7,
+              "offset": 259
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnote",
+          "children": [
+            {
+              "type": "text",
+              "value": "eight escaped",
+              "position": {
+                "start": {
+                  "line": 11,
+                  "column": 9,
+                  "offset": 261
+                },
+                "end": {
+                  "line": 11,
+                  "column": 22,
+                  "offset": 274
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": "]",
+              "position": {
+                "start": {
+                  "line": 11,
+                  "column": 22,
+                  "offset": 274
+                },
+                "end": {
+                  "line": 11,
+                  "column": 24,
+                  "offset": 276
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": " nine",
+              "position": {
+                "start": {
+                  "line": 11,
+                  "column": 24,
+                  "offset": 276
+                },
+                "end": {
+                  "line": 11,
+                  "column": 29,
+                  "offset": 281
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 11,
+              "column": 7,
+              "offset": 259
+            },
+            "end": {
+              "line": 11,
+              "column": 30,
+              "offset": 282
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "text",
+          "value": " bravo.",
+          "position": {
+            "start": {
+              "line": 11,
+              "column": 30,
+              "offset": 282
+            },
+            "end": {
+              "line": 11,
+              "column": 37,
+              "offset": 289
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 11,
+          "column": 1,
+          "offset": 253
+        },
+        "end": {
+          "line": 11,
+          "column": 37,
+          "offset": 289
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "alpha ",
+          "position": {
+            "start": {
+              "line": 13,
+              "column": 1,
+              "offset": 291
+            },
+            "end": {
+              "line": 13,
+              "column": 7,
+              "offset": 297
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnote",
+          "children": [],
+          "position": {
+            "start": {
+              "line": 13,
+              "column": 7,
+              "offset": 297
+            },
+            "end": {
+              "line": 13,
+              "column": 10,
+              "offset": 300
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "text",
+          "value": " bravo.",
+          "position": {
+            "start": {
+              "line": 13,
+              "column": 10,
+              "offset": 300
+            },
+            "end": {
+              "line": 13,
+              "column": 17,
+              "offset": 307
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 13,
+          "column": 1,
+          "offset": 291
+        },
+        "end": {
+          "line": 13,
+          "column": 17,
+          "offset": 307
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Mixing code with inline notes:",
+          "position": {
+            "start": {
+              "line": 15,
+              "column": 1,
+              "offset": 309
+            },
+            "end": {
+              "line": 15,
+              "column": 31,
+              "offset": 339
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 15,
+          "column": 1,
+          "offset": 309
+        },
+        "end": {
+          "line": 15,
+          "column": 31,
+          "offset": 339
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Inline note with ",
+          "position": {
+            "start": {
+              "line": 17,
+              "column": 1,
+              "offset": 341
+            },
+            "end": {
+              "line": 17,
+              "column": 18,
+              "offset": 358
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnote",
+          "children": [
+            {
+              "type": "text",
+              "value": "one ",
+              "position": {
+                "start": {
+                  "line": 17,
+                  "column": 20,
+                  "offset": 360
+                },
+                "end": {
+                  "line": 17,
+                  "column": 24,
+                  "offset": 364
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "inlineCode",
+              "value": "code `` and such",
+              "position": {
+                "start": {
+                  "line": 17,
+                  "column": 24,
+                  "offset": 364
+                },
+                "end": {
+                  "line": 17,
+                  "column": 48,
+                  "offset": 388
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": " three",
+              "position": {
+                "start": {
+                  "line": 17,
+                  "column": 48,
+                  "offset": 388
+                },
+                "end": {
+                  "line": 17,
+                  "column": 54,
+                  "offset": 394
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 17,
+              "column": 18,
+              "offset": 358
+            },
+            "end": {
+              "line": 17,
+              "column": 55,
+              "offset": 395
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "text",
+          "value": " bravo.",
+          "position": {
+            "start": {
+              "line": 17,
+              "column": 55,
+              "offset": 395
+            },
+            "end": {
+              "line": 17,
+              "column": 62,
+              "offset": 402
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 17,
+          "column": 1,
+          "offset": 341
+        },
+        "end": {
+          "line": 17,
+          "column": 62,
+          "offset": 402
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Inline note with ",
+          "position": {
+            "start": {
+              "line": 19,
+              "column": 1,
+              "offset": 404
+            },
+            "end": {
+              "line": 19,
+              "column": 18,
+              "offset": 421
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "footnote",
+          "children": [
+            {
+              "type": "text",
+              "value": "one ",
+              "position": {
+                "start": {
+                  "line": 19,
+                  "column": 20,
+                  "offset": 423
+                },
+                "end": {
+                  "line": 19,
+                  "column": 24,
+                  "offset": 427
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "inlineCode",
+              "value": "code ```` and",
+              "position": {
+                "start": {
+                  "line": 19,
+                  "column": 24,
+                  "offset": 427
+                },
+                "end": {
+                  "line": 19,
+                  "column": 41,
+                  "offset": 444
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": " three",
+              "position": {
+                "start": {
+                  "line": 19,
+                  "column": 41,
+                  "offset": 444
+                },
+                "end": {
+                  "line": 19,
+                  "column": 47,
+                  "offset": 450
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 19,
+              "column": 18,
+              "offset": 421
+            },
+            "end": {
+              "line": 19,
+              "column": 48,
+              "offset": 451
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "text",
+          "value": " bravo.",
+          "position": {
+            "start": {
+              "line": 19,
+              "column": 48,
+              "offset": 451
+            },
+            "end": {
+              "line": 19,
+              "column": 55,
+              "offset": 458
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 19,
+          "column": 1,
+          "offset": 404
+        },
+        "end": {
+          "line": 19,
+          "column": 55,
+          "offset": 458
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "mixed ^",
+          "position": {
+            "start": {
+              "line": 21,
+              "column": 1,
+              "offset": 460
+            },
+            "end": {
+              "line": 21,
+              "column": 8,
+              "offset": 467
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "linkReference",
+          "identifier": " with `code",
+          "label": " with `code",
+          "referenceType": "shortcut",
+          "children": [
+            {
+              "type": "text",
+              "value": " with `code",
+              "position": {
+                "start": {
+                  "line": 21,
+                  "column": 9,
+                  "offset": 468
+                },
+                "end": {
+                  "line": 21,
+                  "column": 20,
+                  "offset": 479
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 21,
+              "column": 8,
+              "offset": 467
+            },
+            "end": {
+              "line": 21,
+              "column": 21,
+              "offset": 480
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "text",
+          "value": "`",
+          "position": {
+            "start": {
+              "line": 21,
+              "column": 21,
+              "offset": 480
+            },
+            "end": {
+              "line": 21,
+              "column": 22,
+              "offset": 481
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 21,
+          "column": 1,
+          "offset": 460
+        },
+        "end": {
+          "line": 21,
+          "column": 22,
+          "offset": 481
+        },
+        "indent": []
+      }
+    }
+  ],
+  "position": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "offset": 0
+    },
+    "end": {
+      "line": 22,
+      "column": 1,
+      "offset": 482
+    }
+  }
+}
