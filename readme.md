@@ -50,7 +50,6 @@ And our script, `example.js`, looks as follows:
 
 ```js
 var vfile = require('to-vfile')
-var report = require('vfile-reporter')
 var unified = require('unified')
 var markdown = require('remark-parse')
 var remark2rehype = require('remark-rehype')
