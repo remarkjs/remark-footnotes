@@ -485,11 +485,9 @@ test('fixtures', function (t) {
         .use(stringify)
         .use(footnotes, {inlineNotes: true})
       var tree
-      // . var doc
       var expected
 
       tree = processor.parse(input)
-      // . doc = processor.stringify(tree)
 
       try {
         expected = JSON.parse(
@@ -498,7 +496,7 @@ test('fixtures', function (t) {
       } catch (_) {}
 
       if (expected) {
-        t.deepEqual(tree, expected, input.stem + ' (tree)')
+        t.deepLooseEqual(tree, expected, input.stem + ' (tree)')
       } else {
         vfile.writeSync({
           dirname: base,
@@ -507,8 +505,6 @@ test('fixtures', function (t) {
           contents: JSON.stringify(tree, null, 2) + '\n'
         })
       }
-
-      // . t.deepEqual(doc, String(input), input.stem + ' (doc)')
     })
 
   t.end()
