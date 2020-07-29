@@ -25,7 +25,9 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
+  "types": "types/index.d.ts",
   "files": [
+    "types/index.d.ts",
     "index.js"
   ],
   "dependencies": {},
