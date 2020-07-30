@@ -3,6 +3,11 @@
 import {Plugin} from 'unified'
 
 interface RemarkFootnotesOptions {
+  /**
+   * Whether to support `^[inline notes]`
+   *
+   * @defaultValue false
+   */
   inlineNotes?: boolean
 }
 
