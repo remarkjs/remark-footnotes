@@ -2,15 +2,19 @@
 
 import {Plugin} from 'unified'
 
-interface RemarkFootnotesOptions {
-  /**
-   * Whether to support `^[inline notes]`
-   *
-   * @defaultValue false
-   */
-  inlineNotes?: boolean
+declare namespace remarkFootnotes {
+  type Footnotes = Plugin<[RemarkFootnotesOptions?]>
+
+  interface RemarkFootnotesOptions {
+    /**
+     * Whether to support `^[inline notes]`
+     *
+     * @defaultValue false
+     */
+    inlineNotes?: boolean
+  }
 }
 
-declare const remarkFootnotes: Plugin<[RemarkFootnotesOptions?]>
+declare const remarkFootnotes: remarkFootnotes.Footnotes
 
 export = remarkFootnotes
