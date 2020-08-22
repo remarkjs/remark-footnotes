@@ -46,7 +46,7 @@
     "to-vfile": "^6.0.0",
     "unified": "^9.0.0",
     "unist-builder": "^2.0.0",
-    "xo": "^0.32.0"
+    "xo": "^0.33.0"
   },
   "scripts": {
     "format": "remark . -qfo && prettier . --write && xo --fix",
