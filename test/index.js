@@ -4,6 +4,7 @@ var fs = require('fs')
 var path = require('path')
 var test = require('tape')
 var u = require('unist-builder')
+var clean = require('unist-util-remove-position')
 var vfile = require('to-vfile')
 var unified = require('unified')
 var parse = require('remark-parse')
@@ -15,58 +16,42 @@ var footnotes = require('..')
 var base = path.join('test', 'fixtures')
 
 test('parse', function (t) {
-  var basic = unified().use(parse, {position: false}).use(footnotes)
-  var all = basic().use(footnotes, {inlineNotes: true})
+  var basic = unified().use(parse).use(footnotes)
+  var all = unified().use(parse).use(footnotes, {inlineNotes: true})
 
   t.deepEqual(
-    basic.parse('^[inline]'),
-    u('root', [
-      u('paragraph', [
-        u('text', '^'),
-        u(
-          'linkReference',
-          {identifier: 'inline', label: 'inline', referenceType: 'shortcut'},
-          [u('text', 'inline')]
-        )
-      ])
-    ]),
+    clean(basic.parse('^[inline]'), true),
+    u('root', [u('paragraph', [u('text', '^[inline]')])]),
     'should not parse inline footnotes by default'
   )
 
   t.deepEqual(
-    all.parse('^[inline]'),
+    clean(all.parse('^[inline]'), true),
     u('root', [u('paragraph', [u('footnote', [u('text', 'inline')])])]),
     'should parse inline footnotes in `inlineNotes` mode'
   )
 
   t.deepEqual(
-    basic()
-      .use(parse, {gfm: false})
-      .parse('[^def inition]: https://example.com'),
-    u('root', [
-      u('paragraph', [u('text', '[^def inition]: https://example.com')])
-    ]),
+    clean(basic().parse('[^]: https://example.com'), true),
+    u('root', [u('paragraph', [u('text', '[^]: https://example.com')])]),
     'should no longer allow normal definitions that start w/ caret'
   )
 
   t.deepEqual(
-    basic.parse('Such as [^like so], [^or so][], or [^like this][this].'),
+    clean(
+      basic.parse('Such as [^like so], [^or so][], or [^like this][this].'),
+      true
+    ),
     u('root', [
       u('paragraph', [
-        u('text', 'Such as [^like so], [^or so][], or [^like this]'),
-        u(
-          'linkReference',
-          {identifier: 'this', label: 'this', referenceType: 'shortcut'},
-          [u('text', 'this')]
-        ),
-        u('text', '.')
+        u('text', 'Such as [^like so], [^or so][], or [^like this][this].')
       ])
     ]),
     'should no longer allow normal references that start w/ caret'
   )
 
   t.deepEqual(
-    basic.parse('[definition]: https://example.com'),
+    clean(basic.parse('[definition]: https://example.com'), true),
     u('root', [
       u('definition', {
         identifier: 'definition',
@@ -79,124 +64,129 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    basic.parse('Such as [like so], [or so][], or [like this][this].'),
+    clean(
+      basic.parse('Such as [x], [x][], or [like this][x].\n\n[x]: y'),
+      true
+    ),
     u('root', [
       u('paragraph', [
         u('text', 'Such as '),
         u(
           'linkReference',
-          {identifier: 'like so', label: 'like so', referenceType: 'shortcut'},
-          [u('text', 'like so')]
+          {identifier: 'x', label: 'x', referenceType: 'shortcut'},
+          [u('text', 'x')]
         ),
         u('text', ', '),
         u(
           'linkReference',
-          {identifier: 'or so', label: 'or so', referenceType: 'collapsed'},
-          [u('text', 'or so')]
+          {identifier: 'x', label: 'x', referenceType: 'collapsed'},
+          [u('text', 'x')]
         ),
         u('text', ', or '),
         u(
           'linkReference',
-          {identifier: 'this', label: 'this', referenceType: 'full'},
+          {identifier: 'x', label: 'x', referenceType: 'full'},
           [u('text', 'like this')]
         ),
         u('text', '.')
-      ])
+      ]),
+      u('definition', {identifier: 'x', label: 'x', url: 'y', title: null})
     ]),
     'should still allow proper normal references'
   )
 
   t.deepEqual(
-    basic.parse('['),
+    clean(basic.parse('['), true),
     u('root', [u('paragraph', [u('text', '[')])]),
     'should not crash on `[`'
   )
   t.deepEqual(
-    basic.parse('[]'),
+    clean(basic.parse('[]'), true),
     u('root', [u('paragraph', [u('text', '[]')])]),
     'should not crash on `[]`'
   )
   t.deepEqual(
-    basic.parse('[^'),
+    clean(basic.parse('[^'), true),
     u('root', [u('paragraph', [u('text', '[^')])]),
     'should not crash on `[^`'
   )
   t.deepEqual(
-    basic.parse('[^]'),
+    clean(basic.parse('[^]'), true),
     u('root', [u('paragraph', [u('text', '[^]')])]),
     'should not crash on `[^]`'
   )
   t.deepEqual(
-    basic.parse('[^ '),
-    u('root', [u('paragraph', [u('text', '[^ ')])]),
+    clean(basic.parse('[^ '), true),
+    u('root', [u('paragraph', [u('text', '[^')])]),
     'should not crash on `[^ `'
   )
   t.deepEqual(
-    basic.parse('[^a]'),
+    clean(basic.parse('[^a]\n\n[^a]:'), true),
     u('root', [
-      u('paragraph', [u('footnoteReference', {label: 'a', identifier: 'a'})])
+      u('paragraph', [u('footnoteReference', {label: 'a', identifier: 'a'})]),
+      u('footnoteDefinition', {identifier: 'a', label: 'a'}, [])
     ]),
     'should not crash on `[^a]` (conforming)'
   )
 
   t.deepEqual(
-    all.parse('^'),
+    clean(all.parse('^'), true),
     u('root', [u('paragraph', [u('text', '^')])]),
     'should not crash on `^`'
   )
   t.deepEqual(
-    all.parse('^['),
+    clean(all.parse('^['), true),
     u('root', [u('paragraph', [u('text', '^[')])]),
     'should not crash on `^[`'
   )
   t.deepEqual(
-    all.parse('^[]'),
+    clean(all.parse('^[]'), true),
     u('root', [u('paragraph', [u('footnote', [])])]),
     'should not crash on `^[]` (conforming)'
   )
   t.deepEqual(
-    all.parse('^[\\'),
+    clean(all.parse('^[\\'), true),
     u('root', [u('paragraph', [u('text', '^[\\')])]),
     'should not crash on `^[\\`'
   )
   t.deepEqual(
-    all.parse('^[asd\\'),
+    clean(all.parse('^[asd\\'), true),
     u('root', [u('paragraph', [u('text', '^[asd\\')])]),
     'should not crash on `^[asd\\`'
   )
   t.deepEqual(
-    all.parse('^[asd\\]'),
-    u('root', [u('paragraph', [u('text', '^[asd'), u('text', ']')])]),
+    clean(all.parse('^[asd\\]'), true),
+    u('root', [u('paragraph', [u('text', '^[asd]')])]),
     'should not crash on `^[asd\\]`'
   )
   t.deepEqual(
-    all.parse('^[\\\\]'),
+    clean(all.parse('^[\\\\]'), true),
     u('root', [u('paragraph', [u('footnote', [u('text', '\\')])])]),
     'should not crash on `^[\\\\]` (conforming)'
   )
   t.deepEqual(
-    all.parse('^[\\]]'),
+    clean(all.parse('^[\\]]'), true),
     u('root', [u('paragraph', [u('footnote', [u('text', ']')])])]),
     'should not crash on `^[\\]]` (conforming)'
   )
 
   t.deepEqual(
-    basic.parse('[^a]:'),
+    clean(basic.parse('[^a]:'), true),
     u('root', [u('footnoteDefinition', {identifier: 'a', label: 'a'}, [])]),
     'should not crash on `[^a]:` (conforming)'
   )
   t.deepEqual(
-    basic.parse('[^a]:   '),
+    clean(basic.parse('[^a]:   '), true),
     u('root', [u('footnoteDefinition', {identifier: 'a', label: 'a'}, [])]),
     'should not crash on `[^a]:   ` (3 spaces, conforming)'
   )
   t.deepEqual(
-    basic.parse('[^a]:        '),
+    clean(basic.parse('[^a]:        '), true),
     u('root', [u('footnoteDefinition', {identifier: 'a', label: 'a'}, [])]),
     'should not crash on `[^a]:        ` (8 spaces, conforming)'
   )
   t.deepEqual(
-    basic.parse('[^a]:b'),
+    clean(basic.parse('[^a]:b'), true),
     u('root', [
       u('footnoteDefinition', {identifier: 'a', label: 'a'}, [
         u('paragraph', [u('text', 'b')])
@@ -206,21 +196,18 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    basic.parse('> block quote\n[^1]: 1'),
+    clean(basic.parse('> block quote\n[^1]: 1'), true),
     u('root', [
-      u('blockquote', [
-        u('paragraph', [
-          u('text', 'block quote\n'),
-          u('footnoteReference', {identifier: '1', label: '1'}),
-          u('text', ': 1')
-        ])
+      u('blockquote', [u('paragraph', [u('text', 'block quote')])]),
+      u('footnoteDefinition', {identifier: '1', label: '1'}, [
+        u('paragraph', [u('text', '1')])
       ])
     ]),
-    'should not interrupt a block quote'
+    'should interrupt a block quote'
   )
 
   t.deepEqual(
-    basic.parse('---\n[^1]: 1'),
+    clean(basic.parse('---\n[^1]: 1'), true),
     u('root', [
       u('thematicBreak'),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -231,7 +218,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    basic.parse('# Heading\n[^1]: 1'),
+    clean(basic.parse('# Heading\n[^1]: 1'), true),
     u('root', [
       u('heading', {depth: 1}, [u('text', 'Heading')]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -242,7 +229,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    basic.parse('```fenced\n```\n[^1]: 1'),
+    clean(basic.parse('```fenced\n```\n[^1]: 1'), true),
     u('root', [
       u('code', {lang: 'fenced', meta: null}, ''),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -253,7 +240,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    basic.parse('    indented\n[^1]: 1'),
+    clean(basic.parse('    indented\n[^1]: 1'), true),
     u('root', [
       u('code', {lang: null, meta: null}, 'indented'),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -264,41 +251,39 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    basic.parse('<html>\n[^1]: 1'),
+    clean(basic.parse('<html>\n[^1]: 1'), true),
     u('root', [u('html', '<html>\n[^1]: 1')]),
     'should not interrupt HTML'
   )
 
   t.deepEqual(
-    basic.parse('- list\n[^1]: 1'),
+    clean(basic.parse('- list\n[^1]: 1'), true),
     u('root', [
       u('list', {ordered: false, start: null, spread: false}, [
         u('listItem', {spread: false, checked: null}, [
-          u('paragraph', [
-            u('text', 'list\n'),
-            u('footnoteReference', {identifier: '1', label: '1'}),
-            u('text', ': 1')
-          ])
+          u('paragraph', [u('text', 'list')])
         ])
+      ]),
+      u('footnoteDefinition', {identifier: '1', label: '1'}, [
+        u('paragraph', [u('text', '1')])
       ])
     ]),
-    'should not interrupt a list'
+    'should interrupt a list'
   )
 
   t.deepEqual(
-    basic.parse('paragraph\n[^1]: 1'),
+    clean(basic.parse('paragraph\n[^1]: 1'), true),
     u('root', [
-      u('paragraph', [
-        u('text', 'paragraph\n'),
-        u('footnoteReference', {identifier: '1', label: '1'}),
-        u('text', ': 1')
+      u('paragraph', [u('text', 'paragraph')]),
+      u('footnoteDefinition', {identifier: '1', label: '1'}, [
+        u('paragraph', [u('text', '1')])
       ])
     ]),
-    'should not interrupt a paragraph'
+    'should interrupt a paragraph'
   )
 
   t.deepEqual(
-    basic.parse('[^1]\n\n[^1]: 1\nParagraph'),
+    clean(basic.parse('[^1]\n\n[^1]: 1\nParagraph'), true),
     u('root', [
       u('paragraph', [u('footnoteReference', {identifier: '1', label: '1'})]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -309,7 +294,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    basic.parse('[^1]\n\n[^1]: 1\n\tParagraph'),
+    clean(basic.parse('[^1]\n\n[^1]: 1\n\tParagraph'), true),
     u('root', [
       u('paragraph', [u('footnoteReference', {identifier: '1', label: '1'})]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -319,7 +304,7 @@ test('parse', function (t) {
     'should indent with tabs'
   )
   t.deepEqual(
-    basic.parse('[^1]\n\n[^1]: 1\n   \tParagraph'),
+    clean(basic.parse('[^1]\n\n[^1]: 1\n   \tParagraph'), true),
     u('root', [
       u('paragraph', [u('footnoteReference', {identifier: '1', label: '1'})]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -330,11 +315,11 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    basic.parse('[^1]\n\n[^1]: 1\n    \tParagraph'),
+    clean(basic.parse('[^1]\n\n[^1]: 1\n    \tParagraph'), true),
     u('root', [
       u('paragraph', [u('footnoteReference', {identifier: '1', label: '1'})]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
-        u('paragraph', [u('text', '1\n\tParagraph')])
+        u('paragraph', [u('text', '1\nParagraph')])
       ])
     ]),
     'should indent with four spaces, and a next tab is part of the content'
@@ -354,19 +339,19 @@ test('serialize', function (t) {
         u('text', '.')
       ])
     ),
-    '^[Text with _markup_.]',
+    '^[Text with *markup*.]\n',
     'should serialize a footnote'
   )
 
   t.equal(
     p.stringify(u('footnoteReference', {identifier: 'a', label: 'A'})),
-    '[^A]',
+    '[^A]\n',
     'should serialize a footnote reference'
   )
 
   t.equal(
     p.stringify(u('footnoteReference', {identifier: 'a'})),
-    '[^a]',
+    '[^a]\n',
     'should serialize a footnote reference w/o label'
   )
 
@@ -380,7 +365,7 @@ test('serialize', function (t) {
         ])
       ])
     ),
-    '[^A]: Text with _markup_.',
+    '[^A]: Text with *markup*.\n',
     'should serialize a footnote definition'
   )
 
@@ -394,7 +379,7 @@ test('serialize', function (t) {
         ])
       ])
     ),
-    '[^a]: Text with _markup_.',
+    '[^a]: Text with *markup*.\n',
     'should serialize a footnote definition w/o label'
   )
 
@@ -406,7 +391,7 @@ test('serialize', function (t) {
         u('code', 'console.log(1)\n\nconsole.log(2)')
       ])
     ),
-    '[^a]: # Heading\n\n    > Block quote.\n\n        console.log(1)\n\n        console.log(2)',
+    '[^a]: # Heading\n\n    > Block quote.\n\n        console.log(1)\n\n        console.log(2)\n',
     'should serialize a footnote definition w/o label'
   )
 

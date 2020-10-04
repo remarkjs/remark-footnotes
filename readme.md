@@ -10,6 +10,14 @@
 
 [**remark**][remark] plugin to add support for footnotes.
 
+## Important!
+
+This plugin is affected by the new parser in remark
+([`micromark`](https://github.com/micromark/micromark),
+see [`remarkjs/remark#536`](https://github.com/remarkjs/remark/pull/536)).
+Use version 2 while you’re still on remark 12.
+Use version 3 for remark 13+.
+
 ## Install
 
 [npm][]:
@@ -121,13 +129,15 @@ Plugin to add support for footnotes.
 ###### `options.inlineNotes`
 
 Whether to support `^[inline notes]` (`boolean`, default: `false`).
+Passed to [`micromark-extension-footnote`][mm-footnote].
 
 ###### Notes
 
 *   Labels, such as `[^this]` (in a footnote reference) or `[^this]:` (in a
-    footnote definition) cannot contain whitespace
+    footnote definition) work like link references
+*   Footnote definitions work like lists
 *   Image and link references cannot start with carets, so `![^this doesn’t
-    work][]`, and `[^neither does this][]`
+    work][]`
 
 ## Security
 
@@ -137,14 +147,14 @@ scripting (XSS)][xss] attacks.
 
 ## Related
 
-*   [`remark-breaks`](https://github.com/remarkjs/remark-breaks)
-    — More breaks
+*   [`remark-gfm`](https://github.com/remarkjs/remark-gfm)
+    — GitHub Flavored Markdown
 *   [`remark-frontmatter`](https://github.com/remarkjs/remark-frontmatter)
-    — Frontmatter (yaml, toml, and more) support
+    — Frontmatter (YAML, TOML, and more)
+*   [`remark-math`](https://github.com/remarkjs/remark-math)
+    — Math
 *   [`remark-github`](https://github.com/remarkjs/remark-github)
-    — References to issues, PRs, comments, users, etc
-*   [`remark-math`](https://github.com/rokt33r/remark-math)
-    — Inline and block math
+    — Auto-link references like in GitHub issues, PRs, and comments
 
 ## Contribute
 
@@ -209,3 +219,5 @@ abide by its terms.
 [rehype]: https://github.com/rehypejs/rehype
 
 [hast]: https://github.com/syntax-tree/hast
+
+[mm-footnote]: https://github.com/micromark/micromark-extension-footnote#optionsinlinenotes

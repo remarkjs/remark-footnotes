@@ -30,7 +30,10 @@
     "types/index.d.ts",
     "index.js"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "mdast-util-footnote": "^0.1.0",
+    "micromark-extension-footnote": "^0.3.0"
+  },
   "devDependencies": {
     "dtslint": "^4.0.0",
     "nyc": "^15.0.0",
@@ -38,14 +41,15 @@
     "rehype-format": "^3.0.0",
     "rehype-stringify": "^8.0.0",
     "remark-cli": "^8.0.0",
-    "remark-parse": "^8.0.0",
+    "remark-parse": "^9.0.0-alpha.1",
     "remark-preset-wooorm": "^7.0.0",
     "remark-rehype": "^8.0.0",
-    "remark-stringify": "^8.0.0",
+    "remark-stringify": "^9.0.0-alpha.1",
     "tape": "^5.0.0",
     "to-vfile": "^6.0.0",
     "unified": "^9.0.0",
     "unist-builder": "^2.0.0",
+    "unist-util-remove-position": "^3.0.0",
     "xo": "^0.33.0"
   },
   "scripts": {
