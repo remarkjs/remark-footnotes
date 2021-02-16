@@ -172,9 +172,9 @@ abide by its terms.
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/remarkjs/remark-footnotes/main.svg
+[build-badge]: https://github.com/remarkjs/remark-footnotes/workflows/main/badge.svg
 
-[build]: https://travis-ci.org/remarkjs/remark-footnotes
+[build]: https://github.com/remarkjs/remark-footnotes/actions
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/remarkjs/remark-footnotes.svg
 
