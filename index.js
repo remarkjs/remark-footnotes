@@ -1,6 +1,5 @@
-import syntax from 'micromark-extension-footnote'
-import fromMarkdown from 'mdast-util-footnote/from-markdown.js'
-import toMarkdown from 'mdast-util-footnote/to-markdown.js'
+import {footnote} from 'micromark-extension-footnote'
+import {footnoteFromMarkdown, footnoteToMarkdown} from 'mdast-util-footnote'
 
 var warningIssued
 
@@ -24,9 +23,9 @@ export default function remarkFootnotes(options) {
     )
   }
 
-  add('micromarkExtensions', syntax(options))
-  add('fromMarkdownExtensions', fromMarkdown)
-  add('toMarkdownExtensions', toMarkdown)
+  add('micromarkExtensions', footnote(options))
+  add('fromMarkdownExtensions', footnoteFromMarkdown)
+  add('toMarkdownExtensions', footnoteToMarkdown)
 
   function add(field, value) {
     // Other extensions.

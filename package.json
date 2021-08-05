@@ -32,8 +32,8 @@
     "index.js"
   ],
   "dependencies": {
-    "mdast-util-footnote": "^0.1.0",
-    "micromark-extension-footnote": "^0.3.0"
+    "mdast-util-footnote": "^1.0.0",
+    "micromark-extension-footnote": "^1.0.0"
   },
   "devDependencies": {
     "c8": "^7.0.0",
