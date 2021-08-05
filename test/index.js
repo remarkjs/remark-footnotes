@@ -1,17 +1,15 @@
-'use strict'
-
-var fs = require('fs')
-var path = require('path')
-var test = require('tape')
-var u = require('unist-builder')
-var clean = require('unist-util-remove-position')
-var vfile = require('to-vfile')
-var unified = require('unified')
-var parse = require('remark-parse')
-var stringify = require('remark-stringify')
-var remark2rehype = require('remark-rehype')
-var html = require('rehype-stringify')
-var footnotes = require('..')
+import fs from 'fs'
+import path from 'path'
+import test from 'tape'
+import u from 'unist-builder'
+import clean from 'unist-util-remove-position'
+import vfile from 'to-vfile'
+import unified from 'unified'
+import parse from 'remark-parse'
+import stringify from 'remark-stringify'
+import remark2rehype from 'remark-rehype'
+import html from 'rehype-stringify'
+import footnotes from '../index.js'
 
 var base = path.join('test', 'fixtures')
 

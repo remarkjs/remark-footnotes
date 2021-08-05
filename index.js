@@ -1,13 +1,10 @@
-'use strict'
+import syntax from 'micromark-extension-footnote'
+import fromMarkdown from 'mdast-util-footnote/from-markdown.js'
+import toMarkdown from 'mdast-util-footnote/to-markdown.js'
 
-var syntax = require('micromark-extension-footnote')
-var fromMarkdown = require('mdast-util-footnote/from-markdown')
-var toMarkdown = require('mdast-util-footnote/to-markdown')
 var warningIssued
 
-module.exports = footnotes
-
-function footnotes(options) {
+export default function remarkFootnotes(options) {
   var data = this.data()
 
   // Old remark.
