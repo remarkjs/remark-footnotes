@@ -1,42 +1,42 @@
 import fs from 'fs'
 import path from 'path'
 import test from 'tape'
-import u from 'unist-builder'
-import clean from 'unist-util-remove-position'
-import vfile from 'to-vfile'
-import unified from 'unified'
-import parse from 'remark-parse'
-import stringify from 'remark-stringify'
-import remark2rehype from 'remark-rehype'
-import html from 'rehype-stringify'
-import footnotes from '../index.js'
+import {u} from 'unist-builder'
+import {removePosition} from 'unist-util-remove-position'
+import {readSync, writeSync} from 'to-vfile'
+import {unified} from 'unified'
+import remarkParse from 'remark-parse'
+import remarkStringify from 'remark-stringify'
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
+import remarkFootnotes from '../index.js'
 
 var base = path.join('test', 'fixtures')
 
 test('parse', function (t) {
-  var basic = unified().use(parse).use(footnotes)
-  var all = unified().use(parse).use(footnotes, {inlineNotes: true})
+  var basic = unified().use(remarkParse).use(remarkFootnotes)
+  var all = unified().use(remarkParse).use(remarkFootnotes, {inlineNotes: true})
 
   t.deepEqual(
-    clean(basic.parse('^[inline]'), true),
+    removePosition(basic.parse('^[inline]'), true),
     u('root', [u('paragraph', [u('text', '^[inline]')])]),
     'should not parse inline footnotes by default'
   )
 
   t.deepEqual(
-    clean(all.parse('^[inline]'), true),
+    removePosition(all.parse('^[inline]'), true),
     u('root', [u('paragraph', [u('footnote', [u('text', 'inline')])])]),
     'should parse inline footnotes in `inlineNotes` mode'
   )
 
   t.deepEqual(
-    clean(basic().parse('[^]: https://example.com'), true),
+    removePosition(basic().parse('[^]: https://example.com'), true),
     u('root', [u('paragraph', [u('text', '[^]: https://example.com')])]),
     'should no longer allow normal definitions that start w/ caret'
   )
 
   t.deepEqual(
-    clean(
+    removePosition(
       basic.parse('Such as [^like so], [^or so][], or [^like this][this].'),
       true
     ),
@@ -49,7 +49,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('[definition]: https://example.com'), true),
+    removePosition(basic.parse('[definition]: https://example.com'), true),
     u('root', [
       u('definition', {
         identifier: 'definition',
@@ -62,7 +62,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(
+    removePosition(
       basic.parse('Such as [x], [x][], or [like this][x].\n\n[x]: y'),
       true
     ),
@@ -94,32 +94,32 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('['), true),
+    removePosition(basic.parse('['), true),
     u('root', [u('paragraph', [u('text', '[')])]),
     'should not crash on `[`'
   )
   t.deepEqual(
-    clean(basic.parse('[]'), true),
+    removePosition(basic.parse('[]'), true),
     u('root', [u('paragraph', [u('text', '[]')])]),
     'should not crash on `[]`'
   )
   t.deepEqual(
-    clean(basic.parse('[^'), true),
+    removePosition(basic.parse('[^'), true),
     u('root', [u('paragraph', [u('text', '[^')])]),
     'should not crash on `[^`'
   )
   t.deepEqual(
-    clean(basic.parse('[^]'), true),
+    removePosition(basic.parse('[^]'), true),
     u('root', [u('paragraph', [u('text', '[^]')])]),
     'should not crash on `[^]`'
   )
   t.deepEqual(
-    clean(basic.parse('[^ '), true),
+    removePosition(basic.parse('[^ '), true),
     u('root', [u('paragraph', [u('text', '[^')])]),
     'should not crash on `[^ `'
   )
   t.deepEqual(
-    clean(basic.parse('[^a]\n\n[^a]:'), true),
+    removePosition(basic.parse('[^a]\n\n[^a]:'), true),
     u('root', [
       u('paragraph', [u('footnoteReference', {label: 'a', identifier: 'a'})]),
       u('footnoteDefinition', {identifier: 'a', label: 'a'}, [])
@@ -128,63 +128,63 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(all.parse('^'), true),
+    removePosition(all.parse('^'), true),
     u('root', [u('paragraph', [u('text', '^')])]),
     'should not crash on `^`'
   )
   t.deepEqual(
-    clean(all.parse('^['), true),
+    removePosition(all.parse('^['), true),
     u('root', [u('paragraph', [u('text', '^[')])]),
     'should not crash on `^[`'
   )
   t.deepEqual(
-    clean(all.parse('^[]'), true),
+    removePosition(all.parse('^[]'), true),
     u('root', [u('paragraph', [u('footnote', [])])]),
     'should not crash on `^[]` (conforming)'
   )
   t.deepEqual(
-    clean(all.parse('^[\\'), true),
+    removePosition(all.parse('^[\\'), true),
     u('root', [u('paragraph', [u('text', '^[\\')])]),
     'should not crash on `^[\\`'
   )
   t.deepEqual(
-    clean(all.parse('^[asd\\'), true),
+    removePosition(all.parse('^[asd\\'), true),
     u('root', [u('paragraph', [u('text', '^[asd\\')])]),
     'should not crash on `^[asd\\`'
   )
   t.deepEqual(
-    clean(all.parse('^[asd\\]'), true),
+    removePosition(all.parse('^[asd\\]'), true),
     u('root', [u('paragraph', [u('text', '^[asd]')])]),
     'should not crash on `^[asd\\]`'
   )
   t.deepEqual(
-    clean(all.parse('^[\\\\]'), true),
+    removePosition(all.parse('^[\\\\]'), true),
     u('root', [u('paragraph', [u('footnote', [u('text', '\\')])])]),
     'should not crash on `^[\\\\]` (conforming)'
   )
   t.deepEqual(
-    clean(all.parse('^[\\]]'), true),
+    removePosition(all.parse('^[\\]]'), true),
     u('root', [u('paragraph', [u('footnote', [u('text', ']')])])]),
     'should not crash on `^[\\]]` (conforming)'
   )
 
   t.deepEqual(
-    clean(basic.parse('[^a]:'), true),
+    removePosition(basic.parse('[^a]:'), true),
     u('root', [u('footnoteDefinition', {identifier: 'a', label: 'a'}, [])]),
     'should not crash on `[^a]:` (conforming)'
   )
   t.deepEqual(
-    clean(basic.parse('[^a]:   '), true),
+    removePosition(basic.parse('[^a]:   '), true),
     u('root', [u('footnoteDefinition', {identifier: 'a', label: 'a'}, [])]),
     'should not crash on `[^a]:   ` (3 spaces, conforming)'
   )
   t.deepEqual(
-    clean(basic.parse('[^a]:        '), true),
+    removePosition(basic.parse('[^a]:        '), true),
     u('root', [u('footnoteDefinition', {identifier: 'a', label: 'a'}, [])]),
     'should not crash on `[^a]:        ` (8 spaces, conforming)'
   )
   t.deepEqual(
-    clean(basic.parse('[^a]:b'), true),
+    removePosition(basic.parse('[^a]:b'), true),
     u('root', [
       u('footnoteDefinition', {identifier: 'a', label: 'a'}, [
         u('paragraph', [u('text', 'b')])
@@ -194,7 +194,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('> block quote\n[^1]: 1'), true),
+    removePosition(basic.parse('> block quote\n[^1]: 1'), true),
     u('root', [
       u('blockquote', [u('paragraph', [u('text', 'block quote')])]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -205,7 +205,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('---\n[^1]: 1'), true),
+    removePosition(basic.parse('---\n[^1]: 1'), true),
     u('root', [
       u('thematicBreak'),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -216,7 +216,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('# Heading\n[^1]: 1'), true),
+    removePosition(basic.parse('# Heading\n[^1]: 1'), true),
     u('root', [
       u('heading', {depth: 1}, [u('text', 'Heading')]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -227,7 +227,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('```fenced\n```\n[^1]: 1'), true),
+    removePosition(basic.parse('```fenced\n```\n[^1]: 1'), true),
     u('root', [
       u('code', {lang: 'fenced', meta: null}, ''),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -238,7 +238,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('    indented\n[^1]: 1'), true),
+    removePosition(basic.parse('    indented\n[^1]: 1'), true),
     u('root', [
       u('code', {lang: null, meta: null}, 'indented'),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -249,13 +249,13 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('<html>\n[^1]: 1'), true),
+    removePosition(basic.parse('<html>\n[^1]: 1'), true),
     u('root', [u('html', '<html>\n[^1]: 1')]),
     'should not interrupt HTML'
   )
 
   t.deepEqual(
-    clean(basic.parse('- list\n[^1]: 1'), true),
+    removePosition(basic.parse('- list\n[^1]: 1'), true),
     u('root', [
       u('list', {ordered: false, start: null, spread: false}, [
         u('listItem', {spread: false, checked: null}, [
@@ -270,7 +270,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('paragraph\n[^1]: 1'), true),
+    removePosition(basic.parse('paragraph\n[^1]: 1'), true),
     u('root', [
       u('paragraph', [u('text', 'paragraph')]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -281,7 +281,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('[^1]\n\n[^1]: 1\nParagraph'), true),
+    removePosition(basic.parse('[^1]\n\n[^1]: 1\nParagraph'), true),
     u('root', [
       u('paragraph', [u('footnoteReference', {identifier: '1', label: '1'})]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -292,7 +292,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('[^1]\n\n[^1]: 1\n\tParagraph'), true),
+    removePosition(basic.parse('[^1]\n\n[^1]: 1\n\tParagraph'), true),
     u('root', [
       u('paragraph', [u('footnoteReference', {identifier: '1', label: '1'})]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -302,7 +302,7 @@ test('parse', function (t) {
     'should indent with tabs'
   )
   t.deepEqual(
-    clean(basic.parse('[^1]\n\n[^1]: 1\n   \tParagraph'), true),
+    removePosition(basic.parse('[^1]\n\n[^1]: 1\n   \tParagraph'), true),
     u('root', [
       u('paragraph', [u('footnoteReference', {identifier: '1', label: '1'})]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -313,7 +313,7 @@ test('parse', function (t) {
   )
 
   t.deepEqual(
-    clean(basic.parse('[^1]\n\n[^1]: 1\n    \tParagraph'), true),
+    removePosition(basic.parse('[^1]\n\n[^1]: 1\n    \tParagraph'), true),
     u('root', [
       u('paragraph', [u('footnoteReference', {identifier: '1', label: '1'})]),
       u('footnoteDefinition', {identifier: '1', label: '1'}, [
@@ -327,7 +327,7 @@ test('parse', function (t) {
 })
 
 test('serialize', function (t) {
-  var p = unified().use(stringify).use(footnotes)
+  var p = unified().use(remarkStringify).use(remarkFootnotes)
 
   t.equal(
     p.stringify(
@@ -398,16 +398,14 @@ test('serialize', function (t) {
 
 test('html', function (t) {
   var p = unified()
-    .use(parse)
-    .use(footnotes, {inlineNotes: true})
-    .use(remark2rehype)
-    .use(html)
+    .use(remarkParse)
+    .use(remarkFootnotes, {inlineNotes: true})
+    .use(remarkRehype)
+    .use(rehypeStringify)
 
   t.equal(
     p
-      .processSync(
-        vfile.readSync({dirname: base, basename: 'footnotes-pandoc.md'})
-      )
+      .processSync(readSync({dirname: base, basename: 'footnotes-pandoc.md'}))
       .toString(),
     [
       '<p>Here is a footnote reference,<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup> and another.<sup id="fnref-longnote"><a href="#fn-longnote" class="footnote-ref">longnote</a></sup></p>',
@@ -438,7 +436,7 @@ test('html', function (t) {
   t.equal(
     p
       .processSync(
-        vfile.readSync({dirname: base, basename: 'inline-notes-pandoc.md'})
+        readSync({dirname: base, basename: 'inline-notes-pandoc.md'})
       )
       .toString(),
     [
@@ -462,11 +460,11 @@ test('fixtures', function (t) {
   fs.readdirSync(base)
     .filter((d) => /\.md$/.test(d))
     .forEach((name) => {
-      var input = vfile.readSync({dirname: base, basename: name})
+      var input = readSync({dirname: base, basename: name})
       var processor = unified()
-        .use(parse)
-        .use(stringify)
-        .use(footnotes, {inlineNotes: true})
+        .use(remarkParse)
+        .use(remarkStringify)
+        .use(remarkFootnotes, {inlineNotes: true})
       var tree
       var expected
 
@@ -474,18 +472,18 @@ test('fixtures', function (t) {
 
       try {
         expected = JSON.parse(
-          vfile.readSync({dirname: base, basename: name, extname: '.json'})
+          readSync({dirname: base, basename: name, extname: '.json'})
         )
       } catch (_) {}
 
       if (expected) {
         t.deepLooseEqual(tree, expected, input.stem + ' (tree)')
       } else {
-        vfile.writeSync({
+        writeSync({
           dirname: base,
           basename: name,
           extname: '.json',
-          contents: JSON.stringify(tree, null, 2) + '\n'
+          value: JSON.stringify(tree, null, 2) + '\n'
         })
       }
     })
