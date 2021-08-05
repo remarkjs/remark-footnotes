@@ -51,7 +51,7 @@
     "unified": "^10.0.0",
     "unist-builder": "^3.0.0",
     "unist-util-remove-position": "^4.0.0",
-    "xo": "^0.37.0"
+    "xo": "^0.39.0"
   },
   "scripts": {
     "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
@@ -69,15 +69,9 @@
   },
   "xo": {
     "prettier": true,
-    "esnext": false,
-    "rules": {
-      "no-var": "off",
-      "prefer-arrow-callback": "off",
-      "unicorn/prefer-optional-catch-binding": "off",
-      "complexity": "off",
-      "no-self-compare": "off",
-      "no-lonely-if": "off"
-    }
+    "ignore": [
+      "types/"
+    ]
   },
   "remarkConfig": {
     "plugins": [

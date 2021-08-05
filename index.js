@@ -1,10 +1,10 @@
 import {footnote} from 'micromark-extension-footnote'
 import {footnoteFromMarkdown, footnoteToMarkdown} from 'mdast-util-footnote'
 
-var warningIssued
+let warningIssued
 
 export default function remarkFootnotes(options) {
-  var data = this.data()
+  const data = this.data()
 
   // Old remark.
   /* c8 ignore next 14 */

@@ -11,11 +11,13 @@ import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import remarkFootnotes from '../index.js'
 
-var base = path.join('test', 'fixtures')
+const base = path.join('test', 'fixtures')
 
-test('parse', function (t) {
-  var basic = unified().use(remarkParse).use(remarkFootnotes)
-  var all = unified().use(remarkParse).use(remarkFootnotes, {inlineNotes: true})
+test('parse', (t) => {
+  const basic = unified().use(remarkParse).use(remarkFootnotes)
+  const all = unified()
+    .use(remarkParse)
+    .use(remarkFootnotes, {inlineNotes: true})
 
   t.deepEqual(
     removePosition(basic.parse('^[inline]'), true),
@@ -326,8 +328,8 @@ test('parse', function (t) {
   t.end()
 })
 
-test('serialize', function (t) {
-  var p = unified().use(remarkStringify).use(remarkFootnotes)
+test('serialize', (t) => {
+  const p = unified().use(remarkStringify).use(remarkFootnotes)
 
   t.equal(
     p.stringify(
@@ -396,8 +398,8 @@ test('serialize', function (t) {
   t.end()
 })
 
-test('html', function (t) {
-  var p = unified()
+test('html', (t) => {
+  const p = unified()
     .use(remarkParse)
     .use(remarkFootnotes, {inlineNotes: true})
     .use(remarkRehype)
@@ -456,37 +458,38 @@ test('html', function (t) {
   t.end()
 })
 
-test('fixtures', function (t) {
-  fs.readdirSync(base)
-    .filter((d) => /\.md$/.test(d))
-    .forEach((name) => {
-      var input = readSync({dirname: base, basename: name})
-      var processor = unified()
-        .use(remarkParse)
-        .use(remarkStringify)
-        .use(remarkFootnotes, {inlineNotes: true})
-      var tree
-      var expected
+test('fixtures', (t) => {
+  const files = fs.readdirSync(base).filter((d) => /\.md$/.test(d))
+  let index = -1
 
-      tree = processor.parse(input)
+  while (++index < files.length) {
+    const name = files[index]
+    const input = readSync({dirname: base, basename: name})
+    const processor = unified()
+      .use(remarkParse)
+      .use(remarkStringify)
+      .use(remarkFootnotes, {inlineNotes: true})
+    let expected
 
-      try {
-        expected = JSON.parse(
-          readSync({dirname: base, basename: name, extname: '.json'})
-        )
-      } catch (_) {}
+    const tree = processor.parse(input)
 
-      if (expected) {
-        t.deepLooseEqual(tree, expected, input.stem + ' (tree)')
-      } else {
-        writeSync({
-          dirname: base,
-          basename: name,
-          extname: '.json',
-          value: JSON.stringify(tree, null, 2) + '\n'
-        })
-      }
-    })
+    try {
+      expected = JSON.parse(
+        readSync({dirname: base, basename: name, extname: '.json'})
+      )
+    } catch {}
+
+    if (expected) {
+      t.deepLooseEqual(tree, expected, input.stem + ' (tree)')
+    } else {
+      writeSync({
+        dirname: base,
+        basename: name,
+        extname: '.json',
+        value: JSON.stringify(tree, null, 2) + '\n'
+      })
+    }
+  }
 
   t.end()
 })
