@@ -333,10 +333,12 @@ test('serialize', (t) => {
 
   t.equal(
     p.stringify(
-      u('footnote', [
-        u('text', 'Text with '),
-        u('emphasis', [u('text', 'markup')]),
-        u('text', '.')
+      u('root', [
+        u('footnote', [
+          u('text', 'Text with '),
+          u('emphasis', [u('text', 'markup')]),
+          u('text', '.')
+        ])
       ])
     ),
     '^[Text with *markup*.]\n',
@@ -344,24 +346,28 @@ test('serialize', (t) => {
   )
 
   t.equal(
-    p.stringify(u('footnoteReference', {identifier: 'a', label: 'A'})),
+    p.stringify(
+      u('root', [u('footnoteReference', {identifier: 'a', label: 'A'})])
+    ),
     '[^A]\n',
     'should serialize a footnote reference'
   )
 
   t.equal(
-    p.stringify(u('footnoteReference', {identifier: 'a'})),
+    p.stringify(u('root', [u('footnoteReference', {identifier: 'a'})])),
     '[^a]\n',
     'should serialize a footnote reference w/o label'
   )
 
   t.equal(
     p.stringify(
-      u('footnoteDefinition', {identifier: 'a', label: 'A'}, [
-        u('paragraph', [
-          u('text', 'Text with '),
-          u('emphasis', [u('text', 'markup')]),
-          u('text', '.')
+      u('root', [
+        u('footnoteDefinition', {identifier: 'a', label: 'A'}, [
+          u('paragraph', [
+            u('text', 'Text with '),
+            u('emphasis', [u('text', 'markup')]),
+            u('text', '.')
+          ])
         ])
       ])
     ),
@@ -371,11 +377,13 @@ test('serialize', (t) => {
 
   t.equal(
     p.stringify(
-      u('footnoteDefinition', {identifier: 'a'}, [
-        u('paragraph', [
-          u('text', 'Text with '),
-          u('emphasis', [u('text', 'markup')]),
-          u('text', '.')
+      u('root', [
+        u('footnoteDefinition', {identifier: 'a'}, [
+          u('paragraph', [
+            u('text', 'Text with '),
+            u('emphasis', [u('text', 'markup')]),
+            u('text', '.')
+          ])
         ])
       ])
     ),
@@ -385,10 +393,13 @@ test('serialize', (t) => {
 
   t.equal(
     p.stringify(
-      u('footnoteDefinition', {identifier: 'a'}, [
-        u('heading', {depth: 1}, [u('text', 'Heading')]),
-        u('blockquote', [u('paragraph', [u('text', 'Block quote.')])]),
-        u('code', 'console.log(1)\n\nconsole.log(2)')
+      // @ts-expect-error: TS can’t infer `depth`.
+      u('root', [
+        u('footnoteDefinition', {identifier: 'a'}, [
+          u('heading', {depth: 1}, [u('text', 'Heading')]),
+          u('blockquote', [u('paragraph', [u('text', 'Block quote.')])]),
+          u('code', 'console.log(1)\n\nconsole.log(2)')
+        ])
       ])
     ),
     '[^a]: # Heading\n\n    > Block quote.\n\n        console.log(1)\n\n        console.log(2)\n',
@@ -469,13 +480,14 @@ test('fixtures', (t) => {
       .use(remarkParse)
       .use(remarkStringify)
       .use(remarkFootnotes, {inlineNotes: true})
+    /** @type {string|undefined} */
     let expected
 
     const tree = processor.parse(input)
 
     try {
       expected = JSON.parse(
-        readSync({dirname: base, basename: name, extname: '.json'})
+        String(readSync({dirname: base, basename: name, extname: '.json'}))
       )
     } catch {}
 
