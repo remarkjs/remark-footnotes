@@ -20,6 +20,9 @@ Use version 3 for remark 13+.
 
 ## Install
 
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
+Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -54,25 +57,27 @@ This paragraph won’t be part of the note, because it
 isn’t indented.
 ```
 
-And our script, `example.js`, looks as follows:
+And our module, `example.js`, looks as follows:
 
 ```js
-var vfile = require('to-vfile')
-var unified = require('unified')
-var markdown = require('remark-parse')
-var remark2rehype = require('remark-rehype')
-var format = require('rehype-format')
-var html = require('rehype-stringify')
-var footnotes = require('remark-footnotes')
+import {readSync} from 'to-vfile'
+import {unified} from 'unified'
+import remarkParse from 'remark-parse'
+import remarkFootnotes from 'remark-footnotes'
+import remarkRehype from 'remark-rehype'
+import rehypeFormat from 'rehype-format'
+import rehypeStringify from 'rehype-stringify'
+
+const file = readSync('example.md')
 
 unified()
-  .use(markdown)
-  .use(footnotes, {inlineNotes: true})
-  .use(remark2rehype)
-  .use(format)
-  .use(html)
-  .process(vfile.readSync('example.md'), function (err, file) {
-    if (err) throw err
+  .use(remarkParse)
+  .use(remarkFootnotes, {inlineNotes: true})
+  .use(remarkRehype)
+  .use(rehypeFormat)
+  .use(rehypeStringify)
+  .process(file)
+  .then((file) => {
     console.log(String(file))
   })
 ```
@@ -122,7 +127,10 @@ Now, running `node example` yields:
 
 ## API
 
-### `remark().use(footnotes[, options])`
+This package exports no identifiers.
+The default export is `remarkFootnotes`.
+
+### `unified().use(remarkFootnotes[, options])`
 
 Plugin to add support for footnotes.
 
