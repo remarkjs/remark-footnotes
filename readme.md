@@ -86,22 +86,22 @@ Now, running `node example` yields:
 
 ```html
 <p>
-  Here is a footnote reference,<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup>
-  another,<sup id="fnref-longnote"><a href="#fn-longnote" class="footnote-ref">longnote</a></sup>,
+  Here is a footnote reference,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
+  another,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>,
   and optionally there are inline
-  notes.<sup id="fnref-2"><a href="#fn-2" class="footnote-ref">2</a></sup>
+  notes.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>
 </p>
 <p>
   This paragraph won’t be part of the note, because it
   isn’t indented.
 </p>
-<div class="footnotes">
+<section class="footnotes" role="doc-endnotes">
   <hr>
   <ol>
-    <li id="fn-1">
-      <p>Here is the footnote.<a href="#fnref-1" class="footnote-backref">↩</a></p>
+    <li id="fn1" role="doc-endnote">
+      <p>Here is the footnote.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn-longnote">
+    <li id="fn2" role="doc-endnote">
       <p>Here’s one with multiple blocks.</p>
       <p>
         Subsequent paragraphs are indented to show that they
@@ -112,17 +112,17 @@ Now, running `node example` yields:
       <p>
         The whole paragraph can be indented, or just the first
         line. In this way, multi-paragraph footnotes work like
-        multi-paragraph list items.<a href="#fnref-longnote" class="footnote-backref">↩</a>
+        multi-paragraph list items.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a>
       </p>
     </li>
-    <li id="fn-2">
+    <li id="fn3" role="doc-endnote">
       <p>
         you can type them inline, which may be easier, since you don’t
-        have to pick an identifier and move down to type the note.<a href="#fnref-2" class="footnote-backref">↩</a>
+        have to pick an identifier and move down to type the note.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩</a>
       </p>
     </li>
   </ol>
-</div>
+</section>
 ```
 
 ## API
