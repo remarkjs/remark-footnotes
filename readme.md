@@ -1,23 +1,12 @@
 # remark-footnotes
 
-**Stability: Legacy**.
-This package is no longer recommended for use.
-It’s still covered by semantic-versioning guarantees and not yet deprecated,
-but use of this package should be avoided.
+Deprecated: this package is no longer maintained.
 Please use [`remark-gfm`][gfm] instead.
-That package match how footnotes work on github.com, which is more likely
-to match the expectations of your authors.
+That package match how footnotes work on github.com,
+which is more likely to match the expectations of authors.
 
-Legacy [documentation for this
-package](https://github.com/remarkjs/remark-footnotes/tree/cab264b)
-is still available in Git.
-
-## License
-
-[MIT][license] © [Titus Wormer][author]
-
-[license]: license
-
-[author]: https://wooorm.com
+[Git][] is still intact and previous versions can still be used without warnings.
 
 [gfm]: https://github.com/remarkjs/remark-gfm
+
+[git]: https://github.com/remarkjs/remark-footnotes/tree/252781c
